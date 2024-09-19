@@ -28,14 +28,14 @@ def get_menu_for_day(date):
     first_weekday_of_month = first_day_of_month.weekday()  # 월: 0, 화: 1, 수: 2, 목: 3, 금: 4, 토: 5, 일: 6
     day_of_week = date.weekday()  # 현재 날짜의 요일
     days_from_start_of_month = (date - first_day_of_month).days
-    print(days_from_start_of_month)
+    
     row_offset = (days_from_start_of_month // 7) + 2  # 첫 번째 주가 2부터 시작
     
     # 요일에 따른 셀렉터 설정
     days_selector = ['mon', 'tue', 'wed', 'thu', 'fri','sat','sun']
     selector = f"#usm-content-body-id > table > tbody > tr:nth-child({row_offset}) > td.{days_selector[day_of_week]}.tch-has"
     day_menu = soup.select_one(selector)
-    print(row_offset,day_of_week)
+    
     # '중식'에 해당하는 메뉴 추출
     if day_menu:
         menu_items = day_menu.find_all('li')
