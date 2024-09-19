@@ -67,9 +67,10 @@ jobs:
       - name: Create Release
         uses: softprops/action-gh-release@v1
         with:
+	  tag_name: ${{ github.ref }}
           files: ./dist/lunch.exe
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          TAG_NAME: ${{ github.ref }}
+          
 
    
