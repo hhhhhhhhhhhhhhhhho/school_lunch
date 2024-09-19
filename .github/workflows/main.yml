@@ -5,6 +5,8 @@ on:
     branches:
       - main
   pull_request:
+  tags:
+      - '*'
 
 jobs:
   build:
@@ -52,3 +54,16 @@ jobs:
           files: ./dist/main.exe
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          TAG_NAME: ${{ github.ref }}
+
+  create_tags:
+    name : Create a tag
+    runs-on: ubuntu-latest
+    steps:
+      - name : Checkout repository
+        uses : actions/checkout@v3
+      - name : Create new tag
+        run: |
+          git tag v1.0.${{github.run_number}}
+          git push origin --tags
+   
